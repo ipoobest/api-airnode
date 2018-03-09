@@ -1,8 +1,12 @@
 var express = require('express');
+
+// var MongoClient = require('mongodb').MongoClient;
+// var url = "mongodb://localhost:27017/";
+
 var app = express();
 
-app.get('/', function(req, res){
-
+app.get('/helloworld', function(req, res){
+    res.end("hello world");
 });
 
 app.post('/', function(req, res){
