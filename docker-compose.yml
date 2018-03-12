@@ -7,9 +7,9 @@ services:
     ports:
       - "3000:3000"
     links:
-      - mongo
-  mongo:
-    container_name: mongo_airnose
+      - database
+
+  database:
     image: mongo
     volumes:
       - ./data:/data/db
