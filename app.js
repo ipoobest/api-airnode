@@ -21,7 +21,7 @@ app.get('/get-api', function(req, res){
 		if(err){
 			throw err;
 		}
-		res.json(air);
+		res.json(air.reverse());
 	});
 });
 
@@ -66,6 +66,6 @@ app.get('/add', function(req, res){
 });
 
 // var server = app.listen(process.env.PORT || 3000, function(){
-var server = app.listen(80, function(){
+var server = app.listen(3000, function(){
     console.log("Start API AIRNODE Successful !!");
 });
