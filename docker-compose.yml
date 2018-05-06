@@ -3,6 +3,8 @@ services:
   app:
     container_name: api_airnose
     restart: always
+    environment:
+      - "TZ=Asia/Bangkok"
     build: .
     ports:
       - "80:80"
@@ -11,6 +13,8 @@ services:
 
   database:
     image: mongo
+    environment:
+      - "TZ=Asia/Bangkok"
     volumes:
       - ./data:/data/db
     ports:
