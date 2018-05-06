@@ -8,7 +8,6 @@ app.use(bodyParser.json());
 Airnose = require('./models/airnose');
 mongoose.connect('mongodb://database:27017/apiairnode');
 // mongoose.connect('mongodb://localhost:27017/apiairnode');
-// mongoose.connect('mongodb://mongodb:27017/apiairnode');
 
 var db = mongoose.connection;
 
@@ -65,7 +64,6 @@ app.get('/add', function(req, res){
 	});
 });
 
-// var server = app.listen(process.env.PORT || 3000, function(){
-var server = app.listen(3000, function(){
+var server = app.listen(80, function(){
     console.log("Start API AIRNODE Successful !!");
 });
