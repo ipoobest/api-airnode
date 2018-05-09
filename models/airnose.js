@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var moment = require('moment-timezone');
 
 var airnoseSchema = mongoose.Schema({
     "site":{
         type:Number
     },
     "time" : {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: moment().tz("Asia/Bangkok").format()
     },
     "temperature":{
         type:Number
