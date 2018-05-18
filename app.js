@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
+var moment = require('moment-timezone');
 
 app.use(bodyParser.json());
 
@@ -38,6 +39,7 @@ app.post('/api/airnose', function(req, res){
 app.get('/add', function(req, res){
 	var airnose = {
 		site: req.query.site,
+		time: moment().tz("Asia/Bangkok"),
 		temperature: req.query.t,
 		humidity: req.query.h,
 		pressure: req.query.p,
