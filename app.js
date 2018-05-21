@@ -3,12 +3,13 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 var moment = require('moment-timezone');
+var zone = "Asia/Bangkok";
 
 app.use(bodyParser.json());
 
 Airnose = require('./models/airnose');
-// mongoose.connect('mongodb://database:27017/apiairnode');
-mongoose.connect('mongodb://localhost:27017/apiairnode');
+mongoose.connect('mongodb://database:27017/apiairnode');
+// mongoose.connect('mongodb://localhost:27017/apiairnode');
 // mongoose.connect('mongodb://mongodb:27017/apiairnode');
 
 var db = mongoose.connection;
@@ -38,9 +39,9 @@ app.post('/api/airnose', function(req, res){
 
 app.get('/get-time', function(req, res){
 	// var time = {
-	// 	time: String(moment().tz("2012-11-04 00:59:59","Asia/Bangkok"))
+	// 	time: String(moment().tz("Asia/Bangkok"))
 	// }
-	res.(moment(date).tz("Asia/Bangkok"))
+	res.json(String(moment.tz(zone).format()));
 });
 
 app.get('/add', function(req, res){
@@ -75,6 +76,6 @@ app.get('/add', function(req, res){
 });
 
 // var server = app.listen(process.env.PORT || 3000, function(){
-var server = app.listen(3000, function(){
+var server = app.listen(80, function(){
     console.log("Start API AIRNODE Successful !!");
 });
