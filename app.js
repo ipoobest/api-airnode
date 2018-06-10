@@ -8,6 +8,7 @@ var zone = "Asia/Bangkok";
 app.use(bodyParser.json());
 
 Airnose = require('./models/airnose');
+
 mongoose.connect('mongodb://database:27017/apiairnode');
 // mongoose.connect('mongodb://localhost:27017/apiairnode');
 // mongoose.connect('mongodb://mongodb:27017/apiairnode');
@@ -25,6 +26,18 @@ app.get('/get-api', function(req, res){
 		}
 		res.json(air.reverse());
 	});
+});
+
+
+app.get('/get-api/:limit', function(req, res){
+	var limit = req.params.limit;
+	limit = parseInt(limit);
+    Airnose.find().limit(limit).sort('-timestmp').exec(function(err, air) {
+		if(err){
+			throw err;
+		}
+		res.json(air);
+	  });
 });
 
 app.post('/api/airnose', function(req, res){
