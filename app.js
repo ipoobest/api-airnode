@@ -11,7 +11,6 @@ Airnose = require('./models/airnose');
 
 mongoose.connect('mongodb://database:27017/apiairnode');
 // mongoose.connect('mongodb://localhost:27017/apiairnode');
-// mongoose.connect('mongodb://mongodb:27017/apiairnode');
 
 var db = mongoose.connection;
 
@@ -19,25 +18,34 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.get('/get-api', function(req, res){
-    Airnose.getAir(function(err, air){
-		if(err){
-			throw err;
-		}
-		res.json(air.reverse());
-	});
-});
 
 
 app.get('/get-api/:limit', function(req, res){
 	var limit = req.params.limit;
 	limit = parseInt(limit);
-    Airnose.find().limit(limit).sort('-timestmp').exec(function(err, air) {
+    Airnose.find({}).sort({_id: -1}).limit(limit).exec(function(err, air) {
 		if(err){
 			throw err;
 		}
 		res.json(air);
 	  });
+});
+
+
+app.get('/get-data-station/:station/:limit' ,function(req,res){
+	var station = req.params.station;
+	var limit = req.params.limit;
+
+	station = parseInt(station);
+	limit = parseInt(limit);
+
+	Airnose.find({site: station}).sort({_id: -1}).limit(limit).exec(function(err, air) {
+		if(err){
+			throw err;
+		}
+		res.json(air);
+	  });
+
 });
 
 app.post('/api/airnose', function(req, res){
