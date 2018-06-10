@@ -64,6 +64,10 @@ var airnoseSchema = mongoose.Schema({
     "sen10":{
         type:Number
     },
+    "timestmp" : {
+        type: Date,
+        default: Date.now 
+    },
 });
 
 var Airnose = module.exports = mongoose.model('Airnose', airnoseSchema);

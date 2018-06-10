@@ -27,6 +27,17 @@ app.get('/get-api', function(req, res){
 	});
 });
 
+app.get('/get-api/:limit', function(req, res){
+	var limit = req.params.limit;
+	limit = parseInt(limit);
+    Airnose.find().limit(limit).sort('-timestmp').exec(function(err, air) {
+		if(err){
+			throw err;
+		}
+		res.json(air);
+	  });
+});
+
 app.post('/api/airnose', function(req, res){
 	var airnose = req.body;
 	Airnose.addAir(airnose, function(err, airnose){
