@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 var moment = require('moment-timezone');
 var zone = "Asia/Bangkok";
 
@@ -9,16 +9,32 @@ app.use(bodyParser.json());
 
 Airnose = require('./models/airnose');
 
-mongoose.connect('mongodb://database:27017/apiairnode');
-// mongoose.connect('mongodb://localhost:27017/apiairnode');
+// mongoose.connect('mongodb://database:27017/apiairnode');
+let mongodb = require('mongodb').MongoClient
+const url = 'mongodb://database:27017'
+const dbname = 'apiairnode'
 
-var db = mongoose.connection;
+mongodb.connect(url, (err, client) => {
+	if (err) return (err)
+	else {
+		const db = client.db(dbName)
+
+		db.collection(type + ":" + entity).insertOne(document, (error, result) => {
+			if (error) return(error)
+			else { resolve(result) }
+		})
+
+		client.close()
+	}
+});
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
+app.get('/test', (req, res) =>{
+	res.end('ffff');
+});
 
 app.get('/get-api/:limit', function(req, res){
 	var limit = req.params.limit;
